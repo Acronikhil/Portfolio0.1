@@ -218,6 +218,7 @@ $(document).ready(() => {
             music.pause();
             music.play();
             music.muted = false;
+            playMusic();
             music.volume = 0.1;
             for (var i = 0.1; i <= 0.5; i += 0.1) {
                 setTimeout((music, i) => {

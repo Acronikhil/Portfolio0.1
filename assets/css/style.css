@@ -77,6 +77,27 @@ body {
 	font-family: "eurostile", "Nunito" !important;
 	z-index: -1;
 
+		text-shadow: 0 0 10px #00d8ff,
+		0 0 16px #03bcf4;
+	animation: animateText 2s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes animateText {
+	from {
+		text-shadow:0 0 10px #00d8ff,
+    0 0 15px #00d8ff,
+    0 0 16px #00d8ff;
+
+	}
+
+	to {
+		.glow-effect {
+			text-shadow:0 0 10px #03bcf4,
+			0 0 15px #03bcf4,
+			0 0 16px #03bcf4;
+		  }
+		  
+	}
 }
 
 .back {
@@ -1553,15 +1574,18 @@ iframe.wait-autoplay {
 	border-top-right-radius: 35%;
 	border-bottom-right-radius: 35%;
 	animation: glow-back-animation 2s ease-in-out infinite alternate;
+	-webkit-box-reflect: below 5px linear-gradient(transparent, rgba(213, 2, 255, 0.082));
 }
 
 @keyframes glow-back-animation {
 	from {
 		box-shadow: 0 0 5px rgba(0, 255, 255, 0.445), 0 0 25px rgba(0, 255, 255, 0.493);
+		-webkit-box-reflect: below 5px linear-gradient(transparent, rgba(213, 2, 255, 0.062));
 	}
 
 	to {
 		box-shadow: 0 0 15px cyan, 0 0 35px cyan;
+		-webkit-box-reflect: below 5px linear-gradient(transparent, rgba(213, 2, 255, 0.075));
 		/* Increase blur radius */
 	}
 }
@@ -1616,11 +1640,11 @@ iframe.wait-autoplay {
 }
 
 .w3-display-left {
-		position: absolute;
-		top: 50%;
-		left: 0%;
-		transform: translate(0%, -45%) !important;
-		-ms-transform: translate(-0%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	transform: translate(0%, -45%) !important;
+	-ms-transform: translate(-0%, -50%);
 }
 
 @media (min-width: 666px) {
@@ -1634,13 +1658,18 @@ iframe.wait-autoplay {
 
 }
 
-.nav-link:hover{
+.nav-link:hover {
 	transition: 0.4s ease-in-out;
 	color: white;
 	font-size: 15px;
 	/* text-shadow: 0 0 5px #c191ff, 0 0 25px #a465f7, 0 0 50px #8e41f3, 0 0 50px #8e41f3; */
-	filter: drop-shadow(0 0 5px #c191ff) /* First shadow */
-    drop-shadow(0 0 25px #2a1646) /* Second shadow */
-    drop-shadow(0 0 50px #8e41f3) /* Third shadow */
-    drop-shadow(0 0 50px #8e41f3); /* Fourth shadow */
+	filter: drop-shadow(0 0 5px #c191ff8f)
+		/* First shadow */
+		drop-shadow(0 0 10px #2a164698)
+		/* Second shadow */
+		drop-shadow(0 0 12px #8e41f38a)
+		/* Third shadow */
+		drop-shadow(0 0 100px #5221918a);
+	/* Fourth shadow */
 }
+
