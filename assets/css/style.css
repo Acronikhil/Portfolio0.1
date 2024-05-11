@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap");
 
+:root {
+	--clr-bg: hsl(323 21% 16%);
+	--clr-purple: hsl(317 100% 54%);
+}
+
+
 .nunito {
 	font-family: "Nunito", "Nunito" !important;
 }
@@ -418,17 +424,14 @@ h6 {
 
 .alert {
 	/* float: right; */
-	background: hsla(236, 100%, 8%, 1);
+	/* background: hsla(236, 100%, 8%, 1); */
 
-	background: linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+	/* background: linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
 
 	background: -moz-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
 
-	background: -webkit-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+	background: -webkit-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%); */
 
-	filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#000328", endColorstr="#00458E", GradientType=1);
-
-	filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#76030F", endColorstr="#121B67", GradientType=1);
 	align-items: flex-start;
 	padding: 20px 40px;
 	padding-right: 50px !important;
@@ -445,9 +448,11 @@ h6 {
 	z-index: 9 !important;
 
 	box-shadow:
-		0 0 60px 30px #ffffffc4,
-		0 0 100px 60px rgba(142, 14, 174, 0.957),
-		0 0 140px 90px rgba(0, 255, 255, 0.457);
+		0 0 35px #ffffffc4,
+		0 0 40px #7510f7,
+		0 0 60px #7510f7,
+		0 0 80px #7510f7,
+		0 0 400px rgba(138, 109, 175, 0.445);
 }
 
 .alert.showAlert {
@@ -527,9 +532,21 @@ h6 {
 	right: 0px;
 	top: 50%;
 	transform: translateY(-50%);
-	background: #0492b979;
+	background: var(--pcolor);
 	padding: 20px 18px;
 	cursor: pointer;
+}
+
+#musicStat,
+#music_name {
+
+	/* color: var(--pcolor) !important; */
+	text-shadow:
+		0 0 10px var(--pcolor),
+		0 0 15px rgb(30, 1, 58),
+		0 0 15px var(--pcolor),
+		0 0 15px whitesmoke,
+		0 0 10px var(--pcolor);
 }
 
 .alert .close-btn:hover {
@@ -1522,4 +1539,108 @@ iframe.wait-autoplay {
 	.goverlay {
 		background: #000;
 	}
+}
+
+.glow-back {
+	box-shadow: 0 0 5px rgba(0, 255, 255, 0.445), 0 0 25px rgba(0, 255, 255, 0.493);
+	transition: box-shadow 0.6s ease-in-out;
+	position: relative;
+	color: white;
+	border: none;
+	padding: 12px;
+	padding-left: 0px;
+	font-family: "Rubik", sans-serif;
+	border-top-right-radius: 35%;
+	border-bottom-right-radius: 35%;
+	animation: glow-back-animation 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-back-animation {
+	from {
+		box-shadow: 0 0 5px rgba(0, 255, 255, 0.445), 0 0 25px rgba(0, 255, 255, 0.493);
+	}
+
+	to {
+		box-shadow: 0 0 15px cyan, 0 0 35px cyan;
+		/* Increase blur radius */
+	}
+}
+
+.glow-back:hover {
+	animation-play-state: paused;
+	;
+}
+
+.music-btn {
+	transition: 0.4s ease-in-out;
+	animation-duration: 2s;
+}
+
+.music-btn:hover {
+	/* box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan,
+	0 0 200px cyan; */
+	cursor: pointer;
+	font-size: 30px !important;
+	border-radius: 100%;
+	text-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan,
+		0 0 200px cyan;
+	/* padding: ; */
+}
+
+.avatar {
+	filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+	/* Glow effect */
+	animation: glow-animation 2s ease-in-out infinite alternate;
+	/* Animation for the glow effect */
+
+}
+
+@keyframes glow-animation {
+	from {
+		filter: drop-shadow(0 0 9px #7510f7);
+		/* Initial glow effect */
+	}
+
+	to {
+		filter: drop-shadow(0 0 10px #a15afd);
+		/* Increased glow effect */
+	}
+}
+
+.w3-display-left {
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	transform: translate(0%, -50%);
+	-ms-transform: translate(-0%, -50%);
+}
+
+.w3-display-left {
+		position: absolute;
+		top: 50%;
+		left: 0%;
+		transform: translate(0%, -45%) !important;
+		-ms-transform: translate(-0%, -50%);
+}
+
+@media (min-width: 666px) {
+	.w3-display-left {
+		position: absolute;
+		top: 50%;
+		left: 0%;
+		transform: translate(0%, -100%) !important;
+		-ms-transform: translate(-0%, -50%);
+	}
+
+}
+
+.nav-link:hover{
+	transition: 0.4s ease-in-out;
+	color: white;
+	font-size: 15px;
+	/* text-shadow: 0 0 5px #c191ff, 0 0 25px #a465f7, 0 0 50px #8e41f3, 0 0 50px #8e41f3; */
+	filter: drop-shadow(0 0 5px #c191ff) /* First shadow */
+    drop-shadow(0 0 25px #2a1646) /* Second shadow */
+    drop-shadow(0 0 50px #8e41f3) /* Third shadow */
+    drop-shadow(0 0 50px #8e41f3); /* Fourth shadow */
 }
