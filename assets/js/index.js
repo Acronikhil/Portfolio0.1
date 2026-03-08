@@ -220,20 +220,33 @@ let isPlaying = false;
 
 // To Play
 const playMusic = () => {
+  try{
+    console.log("trying to play music");
   music.play();
-
+  }
+  catch(error){
+    console.log("Error while plying music");
+    console.log(error.error);
+  }
   isPlaying = true;
-  play.classList.replace("fa-play-circle", "fa-pause-circle");
+  console.log("Music is paused::"+music.paused);
+  if(!music.paused){
+    play.classList.replace("fa-play-circle", "fa-pause-circle");
   music_stat.classList.replace("fa-play-circle", "fa-pause-circle");
-};
+
+  }
+  };
 // To Pause
 const pauseMusic = () => {
   music.pause();
 
   isPlaying = false;
-  play.classList.replace("fa-pause-circle", "fa-play-circle");
+  if(music.paused){
+    play.classList.replace("fa-pause-circle", "fa-play-circle");
   music_stat.classList.replace("fa-pause-circle", "fa-play-circle");
-};
+
+  }
+  };
 
 play.addEventListener("click", () => {
   isPlaying ? pauseMusic() : playMusic();
@@ -293,9 +306,9 @@ const feemplay = document.getElementById("feemplay");
 const btnText = document.getElementById("btnText");
 let videoState = "paused";
 const videoPlay = (name, btnId) => {
-  name.load();
-  name.play();
-  name.requestFullscreen();
+  // name.load();
+  // name.play();
+  // name.requestFullscreen();
   videoState = "playing";
   console.log("vidoState after play btn call:", videoState);
   btnId.textContent = "Pause";
@@ -309,12 +322,12 @@ const videoPause = (name, btnId) => {
   // isPlaying ? pauseMusic() : playMusic();
 };
 
-// feemplay.addEventListener("click", () => {
-// 	let play = document.getElementById("feemplayer");
-// 	// play.play();
-// 	// play.requestFullScreen();
-// 	videoState == "paused" ? videoPlay(play) : videoPause(play);
-// });
+feemplay.addEventListener("click", () => {
+	let play = document.getElementById("feemplayer");
+	play.play();
+	play.requestFullScreen();
+	videoState == "paused" ? videoPlay(play) : videoPause(play);
+});
 
 const videoPlayer = (id, btnId) => {
   videoState == "paused" ? videoPlay(id, btnId) : videoPause(id, btnId);
@@ -355,31 +368,25 @@ $(document).ready(() => {
   showMusicDetails();
   playMusic();
   setTimeout(()=>{
-    console.clear();
     let music = document.getElementById("music");
     music.muted = true;
-    console.log(music.muted);
     if(toPlayMusic){
       music.src = "./assets/music/City-Lights.mp3";
   music_title.title = "City Lights";
   music_name.innerHTML = `City Lights`;
       music.load();
+      music.muted= true;
       music.pause();
     music.play();
     music.muted= false;
     music.volume = 0.1;
     for(var i = 0.1; i <= 0.5;i+=0.1){
     setTimeout((music, i)=>{
-      
-        console.log(i);
-        music.volume = i;
-        
-      
+        music.volume = i;    
     },5000 * i, music, i);
   }
     }
     else{
-      console.clear();
       console.log("I have to pause music");
     }
     
@@ -392,5 +399,5 @@ $("body").on("click", () => {
   webClick == 1 ? playMusic() : "";
 });
 
-// document.onload(()=> showMusicDetails());
+document.onload(()=> showMusicDetails());
 

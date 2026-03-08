@@ -1,4 +1,12 @@
 let webClick = 0;
+
+let videoManager;
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    videoManager = new VideoManager();
+});
+
 const lofi = [
     {
         name: "On-My-Way",
@@ -40,14 +48,16 @@ const lofiBtn = document.getElementById("lofi");
 var preloader = document.getElementById("loading");
 // var hide = document.getElementsByClassName("hide");
 
-function LoaderFunction() {
-  var delayInMilliseconds = 0.1; //1 second
 
-  setTimeout(function () {
-    preloader.style.display = "none";
-    // hide.style.display = "none";
-  }, delayInMilliseconds);
-}
+
+// function LoaderFunction() {
+//   var delayInMilliseconds = 0.1; //1 second
+
+//   setTimeout(function () {
+//     preloader.style.display = "none";
+//     // hide.style.display = "none";
+//   }, delayInMilliseconds);
+// }
 
 // Change Color Of Dribble
 
@@ -82,9 +92,17 @@ let isPlaying = false;
 
 // To Play
 const playMusic = () => {
+
+    // pause currently playing video
+    if (videoManager && videoManager.currentVideo) {
+        videoManager.pause(videoManager.currentVideo);
+    }
+
+    music.muted = false;
     music.play();
 
     isPlaying = true;
+
     play.classList.replace("fa-play-circle", "fa-pause-circle");
     music_stat.classList.replace("fa-play-circle", "fa-pause-circle");
 };
@@ -149,25 +167,62 @@ alert_gen.addEventListener("click", () => {
 const feemplay = document.getElementById("feemplay");
 const btnText = document.getElementById("btnText");
 let videoState = "paused";
+
 const videoPlay = (name, btnId) => {
-    name.load();
-    name.play();
-    name.requestFullscreen();
-    videoState = "playing";
-    console.log("vidoState after play btn call:", videoState);
-    btnId.textContent = "Pause";
+
     pauseMusic();
+
+    const iframe = document.getElementById(name);
+
+    if (iframe && iframe.player) {
+        iframe.player.play();
+    }
+
+    videoState = "playing";
+
+    document.getElementById(btnId).textContent = "Pause";
 };
+
+// 
+
+//     let src = name.src;
+//     name.src = src+"?autoplay=1";    
+//     // name.re
+//     // name.pause();
+//     videoState = "paused";
+//     console.log("vidoState after pause btn call:", videoState);
+//     btnId.textContent = "Play";
+// };
 const videoPause = (name, btnId) => {
-    name.pause();
+
+    const iframe = document.getElementById(name);
+
+    if (iframe && iframe.player) {
+        iframe.player.pause();
+    }
+
     videoState = "paused";
-    console.log("vidoState after pause btn call:", videoState);
-    btnId.textContent = "Play";
+
+    document.getElementById(btnId).textContent = "Play";
 };
 
 
-const videoPlayer = (id, btnId) => {
-    videoState == "paused" ? videoPlay(id, btnId) : videoPause(id, btnId);
+const videoPlayer = (videoId, btnId) => {
+
+    const btn = document.getElementById(btnId);
+
+    if(btn.textContent === "Play"){
+
+        videoManager.play(videoId);
+        btn.textContent = "Pause";
+
+    }else{
+
+        videoManager.pause(videoId);
+        btn.textContent = "Play";
+
+    }
+
 };
 
 const toggle_btn = document.getElementById("gallery");
@@ -207,23 +262,23 @@ $(document).ready(() => {
     // playMusic();
     setTimeout(() => {
         console.clear();
-        let music = document.getElementById("music");
-        music.muted = true;
-        console.log(music.muted);
+        // let music = document.getElementById("music");
+        // music.muted = true;
+        // console.log(music.muted);
         if (toPlayMusic) {
             music.src = "./assets/music/City-Lights.mp3";
   music_title.title = "City Lights";
   music_name.innerHTML = `City Lights`;
-            music.load();
-            music.pause();
-            music.play();
-            music.muted = false;
-            playMusic();
+            // music.load();
+            // music.pause();
+            // music.play();
+            // music.muted = false;
+            // playMusic();
             music.volume = 0.1;
             for (var i = 0.1; i <= 0.5; i += 0.1) {
                 setTimeout((music, i) => {
 
-                    console.log(i);
+                    // console.log(i);
                     music.volume = i;
 
 
@@ -237,17 +292,24 @@ $(document).ready(() => {
 
         // music.pause();
     }, 3000);
+    
+});
 
-});
-$("body").on("click", () => {
-    webClick++;
-    webClick == 1 ? playMusic() : "";
-});
+
+// $("body").on("click", (e) => {
+    
+//     let x = e.target.className =="stretched-link";
+//     webClick++;
+//     if(webClick == 1 && !x) 
+//         playMusic();
+//     else
+//         pauseMusic();
+// });
 
 // document.onload(()=> showMusicDetails());
 
-let viewResume = ()=>{
+let viewResume =  ()=>{
     console.log("View resume");
     window.open(`assets/NikhilDubey_Resume.pdf`, '_blank');
-}
+};
 

@@ -27,8 +27,73 @@
 }
 
 body {
-	background-color: #1c1c1c !important;
-	font-family: "eurostile", "Nunito" !important;
+  margin: 0;
+  font-family: "eurostile", "Nunito";
+background-image:
+	url("../images/bg.svg"),
+	linear-gradient(135deg,  #0b0318 0%,
+    #1a0633 40%,
+    #2a0a4a 65%,
+    #5a1f14 100%);
+  /* background: linear-gradient(
+    135deg,
+    #0b0318 0%,
+    #1a0633 40%,
+    #2a0a4a 65%,
+    #5a1f14 100%
+  ); */
+
+  /* overflow-x: hidden; */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 70% 40%, rgba(255,120,24,0.15), transparent 40%),
+    radial-gradient(circle at 20% 60%, rgba(114,9,183,0.18), transparent 45%);
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+.space-particles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-120vh);
+  }
+}
+.particle {
+  animation:
+    floatParticle linear infinite,
+    twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity:0.3 }
+  50% { opacity:1 }
 }
 
 /* scroll bar */
@@ -592,7 +657,7 @@ h6 {
 
 .container img {
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
 	object-fit: cover;
 	overflow: hidden;
 }
