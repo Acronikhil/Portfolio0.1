@@ -310,6 +310,6 @@ $(document).ready(() => {
 
 let viewResume =  ()=>{
     console.log("View resume");
-    window.open(`assets/NikhilDubey_Resume.pdf`, '_blank');
+    window.open(`assets/Resume/Nikhil_Dubey_CV.pdf`, '_blank');
 };
 

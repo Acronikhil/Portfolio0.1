@@ -220,7 +220,7 @@ body::before .dark:before {
 }
 
 .purple-text{
-	color: 7510f7 !important;
+	color: #7510f7 !important;
 }
 
 .bg {
@@ -241,6 +241,13 @@ h4,
 h5,
 h6 {
 	font-family: "eurostile", "Nunito" !important;
+}
+
+.hero-para{
+	
+	font-family: "eurostile", "Nunito" !important;
+	max-width: 60vw;
+	padding:0 10px;
 }
 
 .skills {
@@ -338,11 +345,16 @@ h6 {
 	color: #7410f711;
 }
 
+.card{
+	text-align: center;
+}
+
 .card-body {
 	flex: 1;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	text-align: justify;
 }
 
 .card-body>div {
