@@ -313,3 +313,30 @@ let viewResume =  ()=>{
     window.open(`assets/Resume/Nikhil_Dubey_CV.pdf`, '_blank');
 };
 
+let showTitile = (e)=>{
+    
+}
+
+function toggleTooltip(el) {
+  el.classList.toggle("show");
+}
+
+
+// LAZY LOADING IMAGE CODE
+const images = document.querySelectorAll(".lazy");
+
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+
+      setTimeout(() => {
+        img.src = img.dataset.src;
+      }, i * 100);
+
+      obs.unobserve(img);
+    }
+  });
+}, { rootMargin: "100px" });
+
+images.forEach(img => observer.observe(img));
