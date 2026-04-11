@@ -33,15 +33,3 @@ function clean() {
   })
 }
 
-
-const container = document.getElementById("gallery");
-
-images.forEach(img => {
-  const el = document.createElement("img");
-  el.src = `./assets/images/${img}`;
-  el.loading = "lazy";
-  el.width = 300;
-  el.height = 200;
-
-  container.appendChild(el);
-});

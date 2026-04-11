@@ -4,6 +4,9 @@ let videoManager;
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = GLightbox({
+    selector: '.glightbox'
+  });
     videoManager = new VideoManager();
 });
 
@@ -261,7 +264,7 @@ $(document).ready(() => {
     showMusicDetails();
     // playMusic();
     setTimeout(() => {
-        console.clear();
+        // console.clear();
         // let music = document.getElementById("music");
         // music.muted = true;
         // console.log(music.muted);
