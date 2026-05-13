@@ -4,9 +4,6 @@ let videoManager;
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const lightbox = GLightbox({
-    selector: '.glightbox'
-  });
     videoManager = new VideoManager();
 });
 
@@ -100,7 +97,7 @@ const playMusic = () => {
     if (videoManager && videoManager.currentVideo) {
         videoManager.pause(videoManager.currentVideo);
     }
-
+    music.load();
     music.muted = false;
     music.play();
 
@@ -153,18 +150,24 @@ prev.addEventListener("click", prevSong);
 
 
 const alert_gen = document.getElementById("trigger");
+const musicAlert = document.querySelector(".alert");
+const musicAlertClose = document.querySelector(".alert .close-btn");
 
 const showMusicDetails = () => {
-    document.querySelector(".alert").classList.add("show");
-    document.querySelector(".alert").classList.remove("hide");
-    document.querySelector(".alert").classList.add("showAlert");
+    musicAlert.classList.add("show");
+    musicAlert.classList.remove("hide");
+    musicAlert.classList.add("showAlert");
     setTimeout(function () {
-        document.querySelector(".alert").classList.remove("show");
-        document.querySelector(".alert").classList.add("hide");
+        musicAlert.classList.remove("show");
+        musicAlert.classList.add("hide");
     }, 3000);
 };
 alert_gen.addEventListener("click", () => {
     showMusicDetails();
+});
+musicAlertClose.addEventListener("click", () => {
+    musicAlert.classList.remove("show");
+    musicAlert.classList.add("hide");
 });
 
 const feemplay = document.getElementById("feemplay");
@@ -272,7 +275,7 @@ $(document).ready(() => {
             music.src = "./assets/music/City-Lights.mp3";
   music_title.title = "City Lights";
   music_name.innerHTML = `City Lights`;
-            // music.load();
+            music.load();
             // music.pause();
             // music.play();
             // music.muted = false;

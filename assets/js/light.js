@@ -1,35 +1,47 @@
 var lightboxDescription = GLightbox({
-  selector: 'glightbox'
+  selector: 'glightbox',
+  touchNavigation: true,
+  keyboardNavigation: true,
+  closeButton: true,
+  closeOnOutsideClick: true,
+  loop: true
 });
 
+function refreshLightbox() {
+  if (lightboxDescription && typeof lightboxDescription.reload === "function") {
+    lightboxDescription.reload();
+  }
+}
 
 function call(id) {
-  const items = Array.from(document.getElementsByClassName("filter"));
-  items.map(function (item, index) {
-    console.log(item);
+  var items = Array.from(document.getElementsByClassName("filter"));
+
+  items.forEach(function (item) {
     if (id === "all") {
       item.classList.remove('d-none');
-      item.classList.add('fadeIn','glightbox');
-      setTimeout(clean,500);
-    } else {
-      const check = items[index].classList.contains(id);
-      console.log(check);
-
-      if (check) {
-        item.classList.remove('d-none');
-        item.classList.add('fadeIn','glightbox');
-      } else {
-        item.classList.add('d-none');
-        item.classList.remove('fadeIn','glightbox');
-      }
+      item.classList.add('fadeIn', 'glightbox');
+      setTimeout(clean, 500);
+      return;
     }
-  })
+
+    if (item.classList.contains(id)) {
+      item.classList.remove('d-none');
+      item.classList.add('fadeIn', 'glightbox');
+    } else {
+      item.classList.add('d-none');
+      item.classList.remove('fadeIn', 'glightbox');
+    }
+  });
+
+  refreshLightbox();
 }
 
 function clean() {
-  const items = Array.from(document.getElementsByClassName("filter"));
-  items.map(function (item, index) {
-    item.classList.remove('fadeIn');
-  })
-}
+  var items = Array.from(document.getElementsByClassName("filter"));
 
+  items.forEach(function (item) {
+    item.classList.remove('fadeIn');
+  });
+
+  refreshLightbox();
+}
