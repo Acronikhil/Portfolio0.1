@@ -692,9 +692,9 @@ h6 {
 	pointer-events: none;
 	transform: translateX(calc(100% + 1rem));
 	z-index: 10000 !important;
-
+	background-color: #000000d7;
 	box-shadow:
-		0 0 35px #ffffffc4,
+		0 0 35px #db4141c4,
 		0 0 40px #7510f7,
 		0 0 60px #7510f7,
 		0 0 80px #7510f7,
@@ -1801,8 +1801,6 @@ h6 {
 	}
 }
 
-
-
-/* image {
-	height: min-content;
-} */
+.accordion-button::after{
+	width: 0px !important;
+}
