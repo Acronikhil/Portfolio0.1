@@ -32,3 +32,4 @@ function clean() {
     item.classList.remove('fadeIn');
   })
 }
+

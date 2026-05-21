@@ -1,3 +1,6 @@
+let webClick = 0;
+
+
 const nonLofisongs = [
   {
     name: "Saviour",
@@ -107,24 +110,43 @@ const nonLofisongs = [
 
 let songs = nonLofisongs;
 
-const lofi = [
-  {
-    name: "Lofi1",
-    title: "Lofi1",
-  },
-  {
-    name: "Lofi2",
-    title: "Lofi2",
-  },
-  {
-    name: "Lofi3",
-    title: "Lofi3",
-  },
-  {
-    name: "Lofi3",
-    title: "Lofi3",
-  },
-];
+  const lofi = [
+    {
+      name: "Lofi1",
+      title: "Lofi1",
+    },
+    {
+      name: "Lofi2",
+      title: "Lofi2",
+    },
+    {
+      name: "Lofi3",
+      title: "Lofi3",
+    },
+    {
+      name: "Lofi3",
+      title: "Lofi3",
+    },
+    {
+      name: "Faasle",
+      title: "Faasle",
+    }, {
+      name: "For Aisha",
+      title: "For Aisha",
+    },
+    {
+      name: "Hidden In The Mist",
+      title: "Hidden In The Mist",
+    },
+    {
+      name: "Journey",
+      title: "Journey",
+    },
+    {
+      name: "Sweet Meetings",
+      title: "Sweet Meetings",
+    },
+  ];
 
 let isLofiOn = false;
 
@@ -170,13 +192,12 @@ const music_title = document.getElementById("music_title");
 const music_name = document.getElementById("music_name");
 const music_stat = document.getElementById("musicStat");
 const lofiBtn = document.getElementById("lofi");
-const sType = document.getElementById("sType");
 
 let songsLength = songs.length;
 
 const loadSong = (songs) => {
   console.log(`Song in load song ${JSON.stringify(songs)}`);
-  music.src = "./assets/" + songs.name + ".mp3";
+  music.src = "./assets/music/" + songs.name + ".mp3";
   music_title.title = songs.title;
   music_name.innerHTML = `${songs.title}`;
 };
@@ -197,24 +218,35 @@ let songIndex = loadRandomSong();
 
 let isPlaying = false;
 
-isLofiOn ? (sType.innerHTML = "Lofi") : (sType.innerHTML = "non lofi");
-
 // To Play
 const playMusic = () => {
+  try{
+    console.log("trying to play music");
   music.play();
-
+  }
+  catch(error){
+    console.log("Error while plying music");
+    console.log(error.error);
+  }
   isPlaying = true;
-  play.classList.replace("fa-play-circle", "fa-pause-circle");
+  console.log("Music is paused::"+music.paused);
+  if(!music.paused){
+    play.classList.replace("fa-play-circle", "fa-pause-circle");
   music_stat.classList.replace("fa-play-circle", "fa-pause-circle");
-};
+
+  }
+  };
 // To Pause
 const pauseMusic = () => {
   music.pause();
 
   isPlaying = false;
-  play.classList.replace("fa-pause-circle", "fa-play-circle");
+  if(music.paused){
+    play.classList.replace("fa-pause-circle", "fa-play-circle");
   music_stat.classList.replace("fa-pause-circle", "fa-play-circle");
-};
+
+  }
+  };
 
 play.addEventListener("click", () => {
   isPlaying ? pauseMusic() : playMusic();
@@ -247,18 +279,10 @@ const autoPlayNext = () => {
   }
 };
 
-const changeSongType = () => {
-  songs = !isLofiOn ? lofi : nonLofisongs;
-  isLofiOn = !isLofiOn;
-  isLofiOn ? (sType.innerHTML = "Lofi") : (sType.innerHTML = "non lofi");
-  loadRandomSong();
-  playMusic();
-};
 
 // loadSong(songs[1]);
 next.addEventListener("click", nextSong);
 prev.addEventListener("click", prevSong);
-lofiBtn.addEventListener("click", changeSongType);
 
 // alert code
 
@@ -282,9 +306,9 @@ const feemplay = document.getElementById("feemplay");
 const btnText = document.getElementById("btnText");
 let videoState = "paused";
 const videoPlay = (name, btnId) => {
-  name.load();
-  name.play();
-  name.requestFullscreen();
+  // name.load();
+  // name.play();
+  // name.requestFullscreen();
   videoState = "playing";
   console.log("vidoState after play btn call:", videoState);
   btnId.textContent = "Pause";
@@ -298,12 +322,12 @@ const videoPause = (name, btnId) => {
   // isPlaying ? pauseMusic() : playMusic();
 };
 
-// feemplay.addEventListener("click", () => {
-// 	let play = document.getElementById("feemplayer");
-// 	// play.play();
-// 	// play.requestFullScreen();
-// 	videoState == "paused" ? videoPlay(play) : videoPause(play);
-// });
+feemplay.addEventListener("click", () => {
+	let play = document.getElementById("feemplayer");
+	play.play();
+	play.requestFullScreen();
+	videoState == "paused" ? videoPlay(play) : videoPause(play);
+});
 
 const videoPlayer = (id, btnId) => {
   videoState == "paused" ? videoPlay(id, btnId) : videoPause(id, btnId);
@@ -329,3 +353,51 @@ toggle_btn.addEventListener("click", () => {
   console.log("Mia to call hua");
   Accordian == "collapsed" ? openAcc() : closeAcc();
 });
+
+const songType = document.querySelector(".sng-type");
+
+$(".sng-type").on("click", () => {
+  showMusicDetails();
+  songType.classList.toggle("lofi");
+  songType.classList.contains("lofi") ? songType.innerHTML = "Lofi Mode" : songType.innerHTML = "Normal Mode";
+});
+
+const toPlayMusic = true;
+
+$(document).ready(() => {
+  showMusicDetails();
+  playMusic();
+  setTimeout(()=>{
+    let music = document.getElementById("music");
+    music.muted = true;
+    if(toPlayMusic){
+      music.src = "./assets/music/City-Lights.mp3";
+  music_title.title = "City Lights";
+  music_name.innerHTML = `City Lights`;
+      music.load();
+      music.muted= true;
+      music.pause();
+    music.play();
+    music.muted= false;
+    music.volume = 0.1;
+    for(var i = 0.1; i <= 0.5;i+=0.1){
+    setTimeout((music, i)=>{
+        music.volume = i;    
+    },5000 * i, music, i);
+  }
+    }
+    else{
+      console.log("I have to pause music");
+    }
+    
+    // music.pause();
+  },3000);
+  
+});
+$("body").on("click", () => {
+  webClick++;
+  webClick == 1 ? playMusic() : "";
+});
+
+document.onload(()=> showMusicDetails());
+
